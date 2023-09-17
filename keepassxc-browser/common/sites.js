@@ -1,6 +1,9 @@
 'use strict';
 
-const PREDEFINED_SITELIST = [
+import { kpxcForm } from '../content/form.js';
+import { MAX_TOTP_INPUT_LENGTH } from '../content/ui.js';
+
+export const PREDEFINED_SITELIST = [
     'https://accounts.google.com/*',
     'https://www.paypal.com/*/cgi-bin/webscr*',
     'https://www.paypal.com/*/checkoutnow*',
@@ -36,7 +39,7 @@ const awsUrl = 'signin.aws.amazon.com';
 const ebayUrl = 'https://www.ebay.';
 const googleUrl = 'https://accounts.google.com';
 
-const kpxcSites = {};
+export const kpxcSites = {};
 kpxcSites.googlePasswordFormUrl = 'https://accounts.google.com/signin/v2/challenge/password';
 kpxcSites.savedForm = undefined;
 

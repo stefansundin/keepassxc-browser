@@ -1,10 +1,17 @@
 'use strict';
 
+import { logDebug } from '../background/page.js';
+import { trimURL } from '../common/global.js';
+import { kpxcSites } from '../common/sites.js';
+import { kpxcFields } from './fields.js';
+import { kpxc, sendMessage } from './keepassxc-browser.js';
+import { kpxcTOTPIcons } from './totp-field.js';
+
 /**
  * @Object kpxcForm
  * Identifies form submits and password changes.
  */
-const kpxcForm = {};
+export const kpxcForm = {};
 kpxcForm.formButtonQuery = 'button[type=button], button[type=submit], input[type=button], input[type=submit], button:not([type]), div[role=button]';
 kpxcForm.savedForms = [];
 kpxcForm.submitTriggered = false;

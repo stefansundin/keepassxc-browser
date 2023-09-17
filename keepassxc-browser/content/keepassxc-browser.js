@@ -1,21 +1,50 @@
 'use strict';
 
+import {
+    IGNORE_FULL,
+    IGNORE_NORMAL,
+    IGNORE_NOTHING,
+    logError,
+    ManualFill,
+    siteMatch,
+    slashNeededForUrl,
+    SORT_BY_GROUP_AND_TITLE,
+    SORT_BY_GROUP_AND_USERNAME,
+    SORT_BY_TITLE,
+    SORT_BY_USERNAME,
+    tr,
+    trimURL,
+} from '../common/global.js';
+import { kpxcSites, PREDEFINED_SITELIST } from '../common/sites.js';
+import { MAX_AUTOCOMPLETE_NAME_LEN } from './autocomplete.js';
+import { kpxcBanner } from './banner.js';
+import { kpxcUserAutocomplete } from './credential-autocomplete.js';
+import { kpxcCustomLoginFieldsBanner } from './custom-fields-banner.js';
+import { kpxcFields } from './fields.js';
+import { kpxcFill } from './fill.js';
+import { kpxcForm } from './form.js';
+import { kpxcIcons } from './icons.js';
+import { kpxcObserverHelper } from './observer-helper.js';
+import { kpxcPasswordDialog } from './pwgen.js';
+import { kpxcTOTPAutocomplete } from './totp-autocomplete.js';
+import { DatabaseState, kpxcUI, logDebug } from './ui.js';
+
 // Contains already called method names
-const _called = {};
+export const _called = {};
 _called.automaticRedetectCompleted = false;
 _called.retrieveCredentials = false;
 
 // Wrapper
-const sendMessage = async function(action, args) {
+export async function sendMessage(action, args) {
     return await browser.runtime.sendMessage({ action: action, args: args });
-};
+}
 
 
 /**
  * @Object kpxc
  * The main content script object.
  */
-const kpxc = {};
+export const kpxc = {};
 kpxc.combinations = [];
 kpxc.credentials = [];
 kpxc.databaseState = DatabaseState.DISCONNECTED;

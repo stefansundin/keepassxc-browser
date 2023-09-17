@@ -1,6 +1,20 @@
 'use strict';
 
-const kpxcPasswordIcons = {};
+import { isFirefox, tr } from '../common/global.js';
+import { kpxcFields } from './fields.js';
+import { kpxcIcons } from './icons.js';
+import { kpxc, sendMessage } from './keepassxc-browser.js';
+import {
+    createStylesheet,
+    DatabaseState,
+    Icon,
+    initColorTheme,
+    kpxcUI,
+    MIN_INPUT_FIELD_OFFSET_WIDTH,
+    Pixels,
+} from './ui.js';
+
+export const kpxcPasswordIcons = {};
 kpxcPasswordIcons.icons = [];
 
 kpxcPasswordIcons.newIcon = function(field, databaseState = DatabaseState.DISCONNECTED) {
@@ -105,7 +119,7 @@ PasswordIcon.prototype.createIcon = function(field) {
  * Provides a password dialog for content scripts.
  * TODO: To be removed when KeePassXC 2.8.0 is released. 2.7.0 already uses KeePassXC's own password generator instead.
  */
-const kpxcPasswordDialog = {};
+export const kpxcPasswordDialog = {};
 kpxcPasswordDialog.created = false;
 kpxcPasswordDialog.icon = null;
 kpxcPasswordDialog.input = null;

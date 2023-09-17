@@ -1,10 +1,23 @@
 'use strict';
 
+import {
+    IGNORE_AUTOSUBMIT,
+    logError,
+    ManualFill,
+    tr,
+} from '../common/global.js';
+import { kpxcUserAutocomplete } from './credential-autocomplete.js';
+import { kpxcFields } from './fields.js';
+import { kpxcForm } from './form.js';
+import { kpxc, sendMessage } from './keepassxc-browser.js';
+import { kpxcTOTPAutocomplete } from './totp-autocomplete.js';
+import { kpxcUI, logDebug } from './ui.js';
+
 /**
  * @Object kpxcFill
  * The class for filling credentials.
  */
-const kpxcFill = {};
+export const kpxcFill = {};
 
 // Fill selected attribute from the context menu
 kpxcFill.fillAttributeToActiveElementWith = async function(attr) {

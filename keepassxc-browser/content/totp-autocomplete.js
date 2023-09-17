@@ -1,6 +1,11 @@
 'use strict';
 
-class TOTPAutocomplete extends Autocomplete {}
+import { Autocomplete } from './autocomplete.js';
+import { kpxcFields } from './fields.js';
+import { kpxcFill } from './fill.js';
+import { kpxc } from './keepassxc-browser.js';
+
+export class TOTPAutocomplete extends Autocomplete {}
 TOTPAutocomplete.prototype.click = async function(e, input) {
     if (!e.isTrusted) {
         return;
@@ -37,4 +42,4 @@ TOTPAutocomplete.prototype.fillTotp = async function(index, uuid, currentInput) 
     kpxcFill.fillTOTPFromUuid(this.input || currentInput, uuid);
 };
 
-const kpxcTOTPAutocomplete = new TOTPAutocomplete();
+export const kpxcTOTPAutocomplete = new TOTPAutocomplete();

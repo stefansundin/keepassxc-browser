@@ -1,8 +1,21 @@
 'use strict';
 
+import { IGNORE_NORMAL, isFirefox, logError, tr } from '../common/global.js';
+import { kpxc, sendMessage } from './keepassxc-browser.js';
+import {
+    createStylesheet,
+    DatabaseState,
+    GREEN_BUTTON,
+    initColorTheme,
+    kpxcUI,
+    ORANGE_BUTTON,
+    Pixels,
+    RED_BUTTON,
+} from './ui.js';
+
 const DEFAULT_BROWSER_GROUP = 'KeePassXC-Browser Passwords';
 
-const kpxcBanner = {};
+export const kpxcBanner = {};
 kpxcBanner.banner = undefined;
 kpxcBanner.created = false;
 kpxcBanner.credentials = {};

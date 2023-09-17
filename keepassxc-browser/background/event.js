@@ -1,6 +1,12 @@
 'use strict';
 
-const kpxcEvent = {};
+import { CHECK_UPDATE_NEVER, logError } from '../common/global.js';
+import { browserAction } from './browserAction.js';
+import { httpAuth } from './httpauth.js';
+import { keepass } from './keepass.js';
+import { page } from './page.js';
+
+export const kpxcEvent = {};
 
 kpxcEvent.onMessage = async function(request, sender) {
     if (request.action in kpxcEvent.messageHandlers) {

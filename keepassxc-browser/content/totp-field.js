@@ -1,9 +1,24 @@
 'use strict';
 
+import { isFirefox, tr } from '../common/global.js';
+import { kpxcSites } from '../common/sites.js';
+import { kpxcFill } from './fill.js';
+import { kpxc } from './keepassxc-browser.js';
+import {
+    createStylesheet,
+    DatabaseState,
+    Icon,
+    kpxcUI,
+    logDebug,
+    MIN_INPUT_FIELD_OFFSET_WIDTH,
+    MIN_TOTP_INPUT_LENGTH,
+    Pixels,
+} from './ui.js';
+
 const ignoreRegex = /(bank|coupon|postal|user|zip).*code|comment|author|error/i;
 const ignoredTypes = [ 'email', 'password', 'username' ];
 
-const acceptedOTPFields = [
+export const acceptedOTPFields = [
     '2fa',
     '2fpin',
     'auth',
@@ -24,7 +39,7 @@ const acceptedParents = [
     '.mfa-verify',
 ];
 
-const kpxcTOTPIcons = {};
+export const kpxcTOTPIcons = {};
 kpxcTOTPIcons.icons = [];
 
 kpxcTOTPIcons.newIcon = function(field, databaseState = DatabaseState.DISCONNECTED, segmented = false) {

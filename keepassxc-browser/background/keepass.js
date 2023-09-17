@@ -1,6 +1,19 @@
 'use strict';
 
-const keepass = {};
+import * as nacl from '../background/nacl.min.js';
+import {
+    AssociatedAction,
+    CHECK_UPDATE_NEVER,
+    EXTENSION_NAME,
+    getCurrentTab,
+    getTopLevelDomainFromUrl,
+    logError,
+} from '../common/global.js';
+import { browserAction } from './browserAction.js';
+import { keepassClient, kpErrors } from './client.js';
+import { logDebug, page } from './page.js';
+
+export const keepass = {};
 keepass.associated = { 'value': false, 'hash': null };
 keepass.keyPair = { publicKey: null, secretKey: null };
 keepass.serverPublicKey = '';
@@ -17,7 +30,7 @@ keepass.databaseHash = '';
 keepass.previousDatabaseHash = '';
 keepass.reconnectLoop = null;
 
-const kpActions = {
+export const kpActions = {
     SET_LOGIN: 'set-login',
     GET_LOGINS: 'get-logins',
     GENERATE_PASSWORD: 'generate-password',

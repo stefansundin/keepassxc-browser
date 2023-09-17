@@ -1,6 +1,11 @@
 'use strict';
 
-const httpAuth = {};
+import { isFirefox, logError, showNotification, tr } from '../common/global.js';
+import { kpxcEvent } from './event.js';
+import { keepass } from './keepass.js';
+import { page } from './page.js';
+
+export const httpAuth = {};
 
 httpAuth.requests = [];
 httpAuth.pendingCallbacks = [];

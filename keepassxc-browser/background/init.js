@@ -1,5 +1,12 @@
 'use strict';
 
+import { getCurrentTab, isFirefox, logError, tr } from '../common/global.js';
+import { browserAction } from './browserAction.js';
+import { kpxcEvent } from './event.js';
+import { httpAuth } from './httpauth.js';
+import { keepass } from './keepass.js';
+import { page } from './page.js';
+
 (async () => {
     try {
         await keepass.migrateKeyRing();
@@ -118,7 +125,7 @@ const contextMenuItems = [
     { title: tr('contextMenuRequestGlobalAutoType'), action: 'request_autotype' }
 ];
 
-const menuContexts = [ 'editable' ];
+export const menuContexts = [ 'editable' ];
 
 if (isFirefox()) {
     menuContexts.push('password');

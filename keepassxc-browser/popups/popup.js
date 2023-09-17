@@ -1,5 +1,8 @@
 'use strict';
 
+import { getCurrentTab, logError } from '../common/global.js';
+import { initColorTheme, resizePopup } from './popup_functions.js';
+
 let reloadCount = 0;
 
 HTMLElement.prototype.show = function() {
@@ -61,7 +64,7 @@ function statusResponse(r) {
     }
 }
 
-const sendMessageToTab = async function(message) {
+async function sendMessageToTab(message) {
     const tab = await getCurrentTab();
     if (!tab) {
         return false; // Only the background devtools or a popup are opened
@@ -72,7 +75,7 @@ const sendMessageToTab = async function(message) {
     });
 
     return true;
-};
+}
 
 (async () => {
     resizePopup();

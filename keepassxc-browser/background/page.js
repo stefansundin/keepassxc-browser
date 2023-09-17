@@ -1,5 +1,19 @@
 'use strict';
 
+import {
+    CHECK_UPDATE_NEVER,
+    debugLogMessage,
+    getCurrentTab,
+    logError,
+    ManualFill,
+    SORT_BY_GROUP_AND_TITLE,
+    SORT_BY_MATCHING_CREDENTIALS_SETTING,
+    SORT_BY_RELEVANT_ENTRY,
+} from '../common/global.js';
+import { browserAction } from './browserAction.js';
+import { menuContexts } from './init.js';
+import { keepass } from './keepass.js';
+
 const defaultSettings = {
     afterFillSorting: SORT_BY_MATCHING_CREDENTIALS_SETTING,
     afterFillSortingTotp: SORT_BY_RELEVANT_ENTRY,
@@ -34,7 +48,7 @@ const defaultSettings = {
 
 const AUTO_SUBMIT_TIMEOUT = 5000;
 
-const page = {};
+export const page = {};
 page.autoSubmitPerformed = false;
 page.attributeMenuItemIds = [];
 page.blockedTabs = [];
@@ -327,7 +341,7 @@ page.updatePopup = function(tab) {
     browserAction.showDefault(tab);
 };
 
-const createContextMenuItem = function({ action, args, ...options }) {
+function createContextMenuItem({ action, args, ...options }) {
     return browser.contextMenus.create({
         contexts: menuContexts,
         onclick: (info, tab) => {
@@ -340,10 +354,10 @@ const createContextMenuItem = function({ action, args, ...options }) {
         },
         ...options
     });
-};
+}
 
-const logDebug = function(message, extra) {
+export function logDebug(message, extra) {
     if (page.settings.debugLogging) {
         debugLogMessage(message, extra);
     }
-};
+}

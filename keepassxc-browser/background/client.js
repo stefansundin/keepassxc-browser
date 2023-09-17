@@ -1,12 +1,22 @@
 'use strict';
 
-const keepassClient = {};
+import * as nacl from '../background/nacl.min.js';
+import {
+    debugLogMessage,
+    EXTENSION_NAME,
+    logError,
+    tr,
+} from '../common/global.js';
+import { keepass, kpActions } from './keepass.js';
+import { page } from './page.js';
+
+export const keepassClient = {};
 keepassClient.keySize = 24;
 keepassClient.messageTimeout = 500; // Milliseconds
 keepassClient.nativeHostName = 'org.keepassxc.keepassxc_browser';
 keepassClient.nativePort = null;
 
-const kpErrors = {
+export const kpErrors = {
     UNKNOWN_ERROR: 0,
     DATABASE_NOT_OPENED: 1,
     DATABASE_HASH_NOT_RECEIVED: 2,

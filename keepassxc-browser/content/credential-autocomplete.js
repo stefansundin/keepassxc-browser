@@ -1,6 +1,13 @@
 'use strict';
 
+import { ManualFill } from '../common/global.js';
+import { Autocomplete } from './autocomplete.js';
+import { kpxcFields } from './fields.js';
+import { kpxcFill } from './fill.js';
+import { sendMessage } from './keepassxc-browser.js';
+
 class CredentialAutocomplete extends Autocomplete {}
+
 CredentialAutocomplete.prototype.click = async function(e) {
     if (!e.isTrusted) {
         return;
@@ -46,4 +53,4 @@ CredentialAutocomplete.prototype.fillPassword = async function(value, index, uui
     await kpxcFill.fillInCredentials(combination, value, uuid, manualFill === ManualFill.PASSWORD);
 };
 
-const kpxcUserAutocomplete = new CredentialAutocomplete();
+export const kpxcUserAutocomplete = new CredentialAutocomplete();

@@ -1,5 +1,20 @@
 'use strict';
 
+import { isFirefox, tr } from '../common/global.js';
+import { kpxcFields } from './fields.js';
+import { kpxc, sendMessage } from './keepassxc-browser.js';
+import {
+    BLUE_BUTTON,
+    createStylesheet,
+    GRAY_BUTTON_CLASS,
+    GREEN_BUTTON,
+    initColorTheme,
+    kpxcUI,
+    ORANGE_BUTTON,
+    Pixels,
+    RED_BUTTON,
+} from './ui.js';
+
 const STEP_NONE = 0;
 const STEP_SELECT_USERNAME = 1;
 const STEP_SELECT_PASSWORD = 2;
@@ -17,7 +32,7 @@ const PASSWORD_FIELD_CLASS = 'kpxcDefine-fixed-password-field';
 const TOTP_FIELD_CLASS = 'kpxcDefine-fixed-totp-field';
 const STRING_FIELD_CLASS = 'kpxcDefine-fixed-string-field';
 
-const kpxcCustomLoginFieldsBanner = {};
+export const kpxcCustomLoginFieldsBanner = {};
 kpxcCustomLoginFieldsBanner.banner = undefined;
 kpxcCustomLoginFieldsBanner.chooser = undefined;
 kpxcCustomLoginFieldsBanner.created = false;

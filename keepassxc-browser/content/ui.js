@@ -1,19 +1,26 @@
 'use strict';
 
-const MIN_TOTP_INPUT_LENGTH = 6;
-const MAX_TOTP_INPUT_LENGTH = 10;
-const MIN_INPUT_FIELD_WIDTH_PX = 8;
-const MIN_INPUT_FIELD_OFFSET_WIDTH = 60;
-const MIN_OPACITY = 0.7;
-const MAX_OPACITY = 1;
+import { debugLogMessage, isFirefox, logError } from '../common/global.js';
+import { kpxcSites } from '../common/sites.js';
+import { kpxcFields } from './fields.js';
+import { kpxcIcons } from './icons.js';
+import { kpxc } from './keepassxc-browser.js';
+import { kpxcPasswordDialog } from './pwgen.js';
 
-const BLUE_BUTTON = 'kpxc-button kpxc-blue-button';
-const GREEN_BUTTON = 'kpxc-button kpxc-green-button';
-const ORANGE_BUTTON = 'kpxc-button kpxc-orange-button';
-const RED_BUTTON = 'kpxc-button kpxc-red-button';
-const GRAY_BUTTON_CLASS = 'kpxc-gray-button';
+export const MIN_TOTP_INPUT_LENGTH = 6;
+export const MAX_TOTP_INPUT_LENGTH = 10;
+export const MIN_INPUT_FIELD_WIDTH_PX = 8;
+export const MIN_INPUT_FIELD_OFFSET_WIDTH = 60;
+export const MIN_OPACITY = 0.7;
+export const MAX_OPACITY = 1;
 
-const DatabaseState = {
+export const BLUE_BUTTON = 'kpxc-button kpxc-blue-button';
+export const GREEN_BUTTON = 'kpxc-button kpxc-green-button';
+export const ORANGE_BUTTON = 'kpxc-button kpxc-orange-button';
+export const RED_BUTTON = 'kpxc-button kpxc-red-button';
+export const GRAY_BUTTON_CLASS = 'kpxc-gray-button';
+
+export const DatabaseState = {
     DISCONNECTED: 0,
     LOCKED: 1,
     UNLOCKED: 2
@@ -23,17 +30,17 @@ let notificationWrapper;
 let notificationTimeout;
 
 // jQuery style wrapper for querySelector()
-const $ = function(elem) {
+function $(elem) {
     return document.querySelector(elem);
-};
+}
 
 // Returns a string with 'px' for CSS styles
-const Pixels = function(value) {
+export function Pixels(value) {
     return String(value) + 'px';
-};
+}
 
 // Basic icon class
-class Icon {
+export class Icon {
     constructor(field, databaseState = DatabaseState.DISCONNECTED, segmented = false) {
         this.databaseState = databaseState;
         this.icon = null;
@@ -69,7 +76,7 @@ class Icon {
     }
 }
 
-const kpxcUI = {};
+export const kpxcUI = {};
 kpxcUI.mouseDown = false;
 
 if (document.body) {
@@ -323,7 +330,7 @@ const DOMRectToArray = function(domRect) {
     return [ domRect.bottom, domRect.height, domRect.left, domRect.right, domRect.top, domRect.width, domRect.x, domRect.y ];
 };
 
-const initColorTheme = function(elem) {
+export function initColorTheme(elem) {
     const colorTheme = kpxc.settings['colorTheme'];
 
     if (colorTheme === undefined) {
@@ -334,20 +341,20 @@ const initColorTheme = function(elem) {
     } else {
         elem.setAttribute('data-bs-theme', colorTheme);
     }
-};
+}
 
-const createStylesheet = function(file) {
+export function createStylesheet(file) {
     const stylesheet = document.createElement('link');
     stylesheet.setAttribute('rel', 'stylesheet');
     stylesheet.setAttribute('href', browser.runtime.getURL(file));
     return stylesheet;
-};
+}
 
-const logDebug = function(message, extra) {
+export function logDebug(message, extra) {
     if (kpxc.settings.debugLogging) {
         debugLogMessage(message, extra);
     }
-};
+}
 
 // Enables dragging
 document.addEventListener('mousemove', function(e) {

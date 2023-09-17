@@ -1,10 +1,16 @@
 'use strict';
 
+import { kpxcForm } from './form.js';
+import { kpxc, sendMessage } from './keepassxc-browser.js';
+import { kpxcPasswordIcons } from './pwgen.js';
+import { kpxcTOTPIcons } from './totp-field.js';
+import { kpxcUsernameIcons } from './username-field.js';
+
 /**
  * @Object kpxcIcons
  * Icon handling.
  */
-const kpxcIcons = {};
+export const kpxcIcons = {};
 kpxcIcons.icons = [];
 kpxcIcons.iconTypes = { USERNAME: 0, PASSWORD: 1, TOTP: 2 };
 

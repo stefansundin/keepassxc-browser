@@ -1,12 +1,19 @@
 'use strict';
 
+import { kpxcSites } from '../common/sites.js';
+import { kpxcIcons } from './icons.js';
+import { kpxc, sendMessage } from './keepassxc-browser.js';
+import { kpxcObserverHelper } from './observer-helper.js';
+import { acceptedOTPFields, kpxcTOTPIcons } from './totp-field.js';
+import { MAX_OPACITY, MIN_INPUT_FIELD_WIDTH_PX, MIN_OPACITY } from './ui.js';
+
 const DEFAULT_SEGMENTED_TOTP_FIELDS = 6;
 
 /**
  * @Object kpxcFields
  * Provides methods for input field handling.
  */
-const kpxcFields = {};
+export const kpxcFields = {};
 
 // Returns all username & password combinations detected from the inputs.
 // After username field is detected, first password field found after that will be saved as a combination.

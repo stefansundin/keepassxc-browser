@@ -1,6 +1,10 @@
 'use strict';
 
-const browserAction = {};
+import { getCurrentTab, isFirefox, logError } from '../common/global.js';
+import { keepass } from './keepass.js';
+import { page } from './page.js';
+
+export const browserAction = {};
 
 browserAction.show = function(tab, popupData) {
     popupData ??= page.popupData;

@@ -1,5 +1,12 @@
 'use strict';
 
+import { kpxcSites } from '../common/sites.js';
+import { kpxcFields } from './fields.js';
+import { kpxcForm } from './form.js';
+import { kpxcIcons } from './icons.js';
+import { _called, kpxc } from './keepassxc-browser.js';
+import { DatabaseState, kpxcUI, logDebug } from './ui.js';
+
 const MAX_CHILDREN = 50;
 const MAX_INPUTS = 100;
 const MAX_MUTATIONS = 200;
@@ -10,7 +17,8 @@ MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
  * @Object kpxcObserverHelper
  * MutationObserver handler for dynamically added input fields.
  */
-const kpxcObserverHelper = {};
+export const kpxcObserverHelper = {};
+
 kpxcObserverHelper.ignoredNodeNames = [ 'g', 'path', 'svg', 'A', 'HEAD', 'HTML', 'LABEL', 'LINK', 'SCRIPT', 'SPAN', 'VIDEO' ];
 
 kpxcObserverHelper.ignoredNodeTypes = [

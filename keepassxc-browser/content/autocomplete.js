@@ -1,6 +1,17 @@
 'use strict';
 
-const MAX_AUTOCOMPLETE_NAME_LEN = 50;
+import {
+    SORT_BY_MATCHING_CREDENTIALS_SETTING,
+    SORT_BY_RELEVANT_ENTRY,
+    tr,
+} from '../common/global.js';
+import { kpxcSites } from '../common/sites.js';
+import { kpxcUserAutocomplete } from './credential-autocomplete.js';
+import { kpxc, sendMessage } from './keepassxc-browser.js';
+import { kpxcTOTPAutocomplete } from './totp-autocomplete.js';
+import { createStylesheet, initColorTheme, kpxcUI, Pixels } from './ui.js';
+
+export const MAX_AUTOCOMPLETE_NAME_LEN = 50;
 
 function cancelEvent(e) {
     e.preventDefault();
@@ -8,7 +19,7 @@ function cancelEvent(e) {
     e.stopImmediatePropagation();
 }
 
-class Autocomplete {
+export class Autocomplete {
     constructor() {
         this.afterFillSort = SORT_BY_MATCHING_CREDENTIALS_SETTING;
         this.autocompleteList = [];

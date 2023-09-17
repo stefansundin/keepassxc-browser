@@ -1,6 +1,20 @@
 'use strict';
 
-const kpxcUsernameIcons = {};
+import { isFirefox, ManualFill, tr } from '../common/global.js';
+import { kpxcFields } from './fields.js';
+import { kpxcFill } from './fill.js';
+import { kpxcIcons } from './icons.js';
+import { kpxc, sendMessage } from './keepassxc-browser.js';
+import {
+    createStylesheet,
+    DatabaseState,
+    Icon,
+    kpxcUI,
+    MIN_INPUT_FIELD_OFFSET_WIDTH,
+    Pixels,
+} from './ui.js';
+
+export const kpxcUsernameIcons = {};
 kpxcUsernameIcons.icons = [];
 kpxcUsernameIcons.detectedFields = [];
 

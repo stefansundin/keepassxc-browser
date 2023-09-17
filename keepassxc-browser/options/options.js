@@ -1,5 +1,23 @@
 'use strict';
 
+import '../bootstrap/bootstrap.min.js';
+import '../common/browser-polyfill.min.js';
+import '../common/translate.js';
+
+import {
+    AssociatedAction,
+    CHECK_UPDATE_NEVER,
+    CHECK_UPDATE_ONE_MONTH,
+    CHECK_UPDATE_ONE_WEEK,
+    CHECK_UPDATE_THREE_DAYS,
+    IGNORE_NOTHING,
+    isEdge,
+    isFirefox,
+    slashNeededForUrl,
+    tr,
+} from '../common/global.js';
+import { PREDEFINED_SITELIST } from '../common/sites.js';
+
 const options = {};
 
 const $ = function(elem) {
@@ -698,7 +716,7 @@ const getBrowserId = function() {
 };
 
 (async() => {
-    try {
+    // try {
         const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
         options.settings = settings;
 
@@ -711,7 +729,7 @@ const getBrowserId = function() {
         options.initSitePreferences();
         options.initAbout();
         options.initTheme();
-    } catch (err) {
-        console.log('Error loading options page: ' + err);
-    }
+    // } catch (err) {
+    //     console.log('Error loading options page: ' + err);
+    // }
 })();
